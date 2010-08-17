@@ -9,8 +9,8 @@
         <%= render :partial => "shared/css" %>
         <%= render :partial => "color_schemes/css", :locals => {:id => current_government.color_scheme_id } %>
         <%= render :partial => "shared/priority_processes_head" if controller_name.index("process") %>
-        <%= stylesheet_link_tag "aug_style" %>
-		<%= stylesheet_link_tag "gnew" %>
+        <%= stylesheet_link_tag "newstuff" %>
+        <%= stylesheet_link_tag "gnew" %>
         <%= stylesheet_link_tag "partners" %>
         <%= javascript_include_tag "skuggathing" unless controller_name=="priority_processes" %>
         <% if controller_name == "facebook" %>
@@ -27,14 +27,12 @@
   <area shape="rect" coords="276,0,308,38" href="http://allskonar.bestiflokkurinn.is" alt="Besti flokkurinn" />
         </map>
     </head>
-	<body>
 	
-	<div id="Wrapper">
-	
-		<!-- Haus -->
-		<div id="Header">
-			
-			<div id="branding" style="height: 52px">
+    <body>
+        <%= blurb("header") %>
+        <div id="backgroundwrap">
+            <div id="header">
+                <div id="branding" style="height: 52px">
                     <% if current_partner %>
 	                    <div id="partner_image">
 	                        <%= render :partial => "partners/logo" %>
@@ -68,58 +66,24 @@
 	                <% end %>
                 </div><%= flash_div :warning, :notice, :error %>
                 <%= render :partial => "ads/pick" %>
-		</div>	
-		<!-- Vinstridálkur -->
-		
-		<div id="LeftCol">
-		
-		<!-- Hefðbundin lúppa -->
-		<ul>
-			<li><a href="">Öll mál</a></li>
-			<li><a href="">Staða samnings</a></li>
-			<li><a href="">Mál af handahófi</a></li>
-		</ul>
-
-		<!-- Lúppa með iconum, þau má setja í css skjalið líka ef vill -->
-		<ul>
-			<li><a href=""><img src="img/icon.gif" align="top" border="0" alt="" /> Taka þátt í umræðu</a></li>
-			<li><a href=""><img src="img/icon.gif" align="top" border="0" alt="" /> Senda inn spurningu</a></li>
-			<li><a href=""><img src="img/icon.gif" align="top" border="0" alt="" /> Leggja inn umsögn</a></li>
-		</ul>
-
-		<ul>
-			<li><a href="">Dagbók aðalsamningamanns</a></li>
-			<li><a href="">Ný svör við spurningum</a></li>
-			<li><a href="">Ítarefni oflr.</a></li>
-		</ul>
-		
-		</div>
-		<!-- Miðjusvæði -->
-		<div id="MainContent">
-		
-		<!-- Haus á miðjusvæði -->
-	  <div id="Content_wrapper">
-				<div id="Ddown"><select>
-				  <option>N&yacute;tt</option>
-		</select></div>
-		  <div id="Tabs">
-				<ul>
-					<li class="active"><a href="#">Öll virkni</a></li>
-					<li><a href="SogS.html">Spurningar og svör</a></li>
-					<li><a href="#">Umræður</a></li>
-					<li><a href="#">Umsagnir</a></li>
-				</ul>
-  </div>				
-				<div id="Content">		  
-				  <%= yield :layout %>
-</div>
-			</div>
-		</div>
-		
-		<!-- Hægridálkur -->
-		
-		<div id="RightCol">
-		<% if logged_in? and current_user.warnings_count > 0 %>
+            </div>
+            <div id="contentwrap">
+                <%= render :partial => "shared/menu" %>
+				<% if current_partner %>
+					<div id="partner_respect_text">
+					<% if current_partner.id==11 %>
+						Þessi síða er ætluð fyrir borgarbúa til að setja fram hugmyndir sem eiga erindi við meirihlutaviðræður Besta flokksins og Samfylkingarinnar. Vinsamlegast settu bara hugmyndir hér sem þér finnst eiga erindi við Betri Reykjavík. 
+					<% else %>
+						Þessi síða er ætluð til umræðu um stefnumál <%= current_partner.name_variations[3] %>. Vinsamlegast settu bara hugmyndir hér sem þér finnst eiga erindi við <%= current_partner.name_variations[1] %>.
+					<% end %>
+					</div>
+				<% end %>
+                <div id="content_text">
+                    <%= yield :layout %>
+                </div>
+            </div>
+            <div id="sidebar">
+                <% if logged_in? and current_user.warnings_count > 0 %>
                 <div id="warning">
                     <%= t('warnings.name', :count => current_user.warnings_count) %>
                 </div>
@@ -148,22 +112,12 @@
                 <% end %>
                 <% end %>
                 <%= render :partial => "shared/skuggathing" %>
-		
-		
-		</div>
-		
-		
-		
-		<!-- Fótur síðunnar -->
-		<div id="Footer">
-			<div id="Footer-right"><a href="#">Reglur</a>  <a href="#">Hjálp</a>  <a href="#">Osfr.</a></div>
-			<div id="Footer-left"><a href="#">Hafðu samband</a></div>
-			<%= render :partial => "shared/footer" %>
-      
-		
-		</div>
-	</div>
-	  <%= render :partial => "shared/analytics" %>
-      <%= render :partial => "shared/facebook_footer" %>
-	</body>
+            </div>
+            <div class="push">
+            </div>
+        </div>
+        <%= render :partial => "shared/footer" %>
+        <%= render :partial => "shared/analytics" %>
+        <%= render :partial => "shared/facebook_footer" %>
+    </body>
 </html>

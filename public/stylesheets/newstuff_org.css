@@ -28,9 +28,9 @@ table tr th { font-weight: bold; padding-right: 0.5em; }
 hr { border-top: 3px solid #e5e5e5; }
 
 #backgroundwrap {
-	width: 960px !important;
-	margin: 0px auto;
+	width: 980px; padding:0px; margin:0px auto; 
 }
+
 #sidebar {
 	width: 220px;
 	float: right;
@@ -40,12 +40,11 @@ hr { border-top: 3px solid #e5e5e5; }
 }
 
 #contentwrap {
-	width:600px; 
-	min-height:500px; 
-	margin-left: 15px; 
-	float:left; line-height:150%; 
-	border: 1px solid #ccc; 
-	border-left: 1px dashed #ccc; 
+	width: 720px;
+	margin-left: 4px;
+	float: left;
+	position: relative;
+	padding: 0px 0px 0px 0px !important;
 }
 
 #branding {
@@ -71,8 +70,7 @@ border: none 0px #fff !important;
 
 
 #content_text {
-padding:5px; margin-top:10px; width:100%; 
-/*	padding: 14px 0px 15px 0px;  */
+	padding: 14px 0px 15px 0px;
 /*	letter-spacing: 0; */
 }
 
